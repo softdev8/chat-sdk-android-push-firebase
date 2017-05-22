@@ -152,26 +152,25 @@ Firebase allows users to login with many different account (Email, Anonymous, Fa
 
 11. Go back to the Firebase dashboard and click **Login & Auth**. Click the Facebook tab and tick the **Enabled** box. Then copy paste your Facebook **App Id** and **App Secret** into the boxes provided
 
-### Backendless Push Notifictions
+### Firebase Cloud Message Push Notifictions
 
-1. If you haven't already got a [Backendless account](https://backendless.com/) then go to the Backendless website and create one
-2. Create a new app on the dashboard and click it
-3. Click settings in the top menu to bring up your app keys
-4. Navigate to your strings.xml file and add your AppID, App Secret and Version
+1. Navigate to the Cloud Message tab of Settings Page
 
-```
-<string name="backendless_app_id">1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
-<string name="backendless_secret_key">1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
-<string name="backendless_app_version">v1</string>
-```
+2. Add ServerKey for Cloud Message
 
-All the code for Push Notifications is already included in the Chat SDK. Getting them working only requires a small amount of configuration. For help regarding this, you can take a look at the [Backendless guide](https://backendless.com/documentation/messaging/android/messaging_push_notification_setup_androi.htm).
+    SERVER_API_KEY = "AAAAMSw-M8U:APA91bFwr3e60WcRw_SrRYnAn7LrejPWgmpsjQ4v9OjFYQlXhp_PPXB8oNUxk_4KNZsIKUpJkjXJwR27FKY-eF3IiYQbCpul441oXVY1r4Amzg8k6mnzpMwXm4yA9JylSoJt_j_P1k-4";
+    private static final String AUTH_KEY = "key=" + SERVER_API_KEY;
+    private static final String FCM_URL = "https://fcm.googleapis.com/fcm/send";
 
->**NOTE:**  
->Some of the steps in this tutorial include adding code to the app, these steps should be unnecessary as they have already been added to the project.
+3.  Tocken Regist:
+    - In the BUserEntity Class, define as following functions:
+        public abstract String getMetaToken ();         
+	public abstract void setMetaToken (String token);   
+    - Also Override this function on BUser Class.
+    - When Loginned, regist token in afterLogin() function.
+      curUser.setMetaToken(strToken);
 
->**NOTE:**  
->If you want push notifications to work in Development mode make sure to configure them in your provisioning profile for both development and production.
+    - FCM in Firebase_plugin    
 
 ### Google Maps
 
